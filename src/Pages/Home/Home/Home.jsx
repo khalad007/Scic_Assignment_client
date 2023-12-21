@@ -1,16 +1,12 @@
 
-// import Banner from "../Banner/Banner";
-
 import Banner from "../Banner/Banner";
-
-
 
 const Home = () => {
     return (
-        
-          <div></div>
+            <div className="lg:mb-0 mb-[340px]">
+                <Banner></Banner>
+            </div>
 
-        
     );
 };
 
