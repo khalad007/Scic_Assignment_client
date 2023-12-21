@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imgBg from "../../assets/login.jpg"
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import swal from "sweetalert";
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -20,6 +22,14 @@ const Register = () => {
             .then(result => {
                 const regUser = result.user;
                 console.log(regUser)
+                updateUserProfile(data.name, data.photoURL)
+                .then(() => {
+                    console.log('user profile update ')
+                    reset();
+                    swal("Good job!", "Register Success!", "success");
+                    navigate('/');
+                })
+                .catch(console.error())
             })
     }
 

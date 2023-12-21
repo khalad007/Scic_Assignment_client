@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import imgBg from "../../assets/login.jpg"
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleLogin = event => {
@@ -14,15 +18,18 @@ const Login = () => {
         const password = form.password.value;
 
         console.log(email, password)
-        signIn(email,password)
+        signIn(email, password)
             .then(reuslt => {
                 const user = reuslt.user;
                 console.log(user)
+                swal("Good job!", "Login Success!", "success");
+                navigate(from, { replace: true })
             })
+
     }
     return (
         <div>
-             <h1 className="text-5xl font-bold my-4 text-center">Login now!</h1>
+            <h1 className="text-5xl font-bold my-4 text-center">Login now!</h1>
             <div className="hero min-h-screen ">
 
                 <div className="hero-content flex-col lg:flex-row">
