@@ -7,6 +7,9 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import UserHome from "../Pages/Dashboard/UserHome";
+import AddTask from "../Pages/Dashboard/AddTask";
+// import UserHome from "../Pages/UserHome/UserHome";
 
 
 export const router = createBrowserRouter([
@@ -26,11 +29,22 @@ export const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register></Register>
-            },
-            {
-                path: 'dashboard',
-                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
             }
         ]
     },
+    {
+        path: 'dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+                path: 'userHome',
+                element: <PrivateRoute><UserHome></UserHome></PrivateRoute>
+            },
+            {
+                path: 'addTask',
+                element: <AddTask></AddTask>
+            }
+        ]
+
+    }
 ]);
